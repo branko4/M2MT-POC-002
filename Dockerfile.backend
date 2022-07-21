@@ -1,0 +1,6 @@
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
+
+#BUILD_DIR = "./Backend/"
+
+
+COPY BUILD_DIR 
