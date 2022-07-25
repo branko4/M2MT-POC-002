@@ -1,8 +1,11 @@
+import { DOCUMENT } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { Component, Inject } from '@angular/core';
+import { Message } from './model/message.model';
 
+class Link {
+  public url: string = "";
+}
 
 @Component({
   selector: 'app-root',
@@ -11,10 +14,14 @@ import { catchError, retry } from 'rxjs/operators';
 })
 export class AppComponent {
   title = 'FrontendTwo';
+  message = new Message("no message");
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, @Inject(DOCUMENT) private document: Document) { }
 
   doSomething() {
-    this.http.get('/one/be/weatherforecast').subscribe();;
+    this.http.post<Link>('/two/be/weatherforecast', this.message).subscribe((redirectLink) => {
+      console.log(redirectLink);
+      this.document.location.href = redirectLink.url;
+    });
   }
 }

@@ -27,18 +27,12 @@ namespace M2MT_POC_002.BackendTwo.Controllers
         {
             var httpClient = _httpClientFactory.CreateClient();
 
-            Console.WriteLine("hit 0");
             var message = new Message();
             message.content = "hallo wereld!";
             var content = new StringContent(JsonSerializer.Serialize(message), Encoding.UTF8, Application.Json);
 
-            Console.WriteLine("hit 1");
-
             using var httpResponseMessage = await httpClient.PostAsync("http://onebackend/weatherforecast", content);
-            Console.WriteLine("hit 2");
             httpResponseMessage.EnsureSuccessStatusCode();
-
-            Console.WriteLine("hit 3");
 
             string redirectLocation = httpResponseMessage.Content.ReadAsStringAsync().Result;
 
@@ -46,6 +40,32 @@ namespace M2MT_POC_002.BackendTwo.Controllers
             Console.Error.WriteLine(redirectLocation);
 
             return new RedirectResult(redirectLocation);
+        }
+
+        public class Link
+        {
+            public string url { get; set; }
+        }
+
+        [HttpPost]
+        async public Task<Link> Post(Message message) 
+        {
+            var link = new Link();
+            link.url = await sendMessage(message);
+            Console.WriteLine(link.url);
+            return link;
+        }
+
+        private async Task<string> sendMessage(Message message)
+        {
+            var httpClient = _httpClientFactory.CreateClient();
+
+            var content = new StringContent(JsonSerializer.Serialize(message), Encoding.UTF8, Application.Json);
+
+            using var httpResponseMessage = await httpClient.PostAsync("http://onebackend/weatherforecast", content);
+            httpResponseMessage.EnsureSuccessStatusCode();
+
+            return httpResponseMessage.Content.ReadAsStringAsync().Result;
         }
     }
 }
