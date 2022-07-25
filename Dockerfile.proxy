@@ -1,0 +1,3 @@
+FROM nginx as FINAL
+
+COPY conf.d/default.conf.template /etc/nginx/templates/default.conf.template

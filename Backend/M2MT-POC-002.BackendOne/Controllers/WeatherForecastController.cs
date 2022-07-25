@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using M2MT_POC_002.Shared;
 
 namespace M2MT_POC_002.BackendOne.Controllers
 {
@@ -6,10 +8,7 @@ namespace M2MT_POC_002.BackendOne.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+        private static Dictionary<string, string> messages = new Dictionary<string, string>();
 
         private readonly ILogger<WeatherForecastController> _logger;
 
@@ -19,15 +18,40 @@ namespace M2MT_POC_002.BackendOne.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public IActionResult Get()
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+            return new RedirectResult("/one/fe/");
+        }
+
+        [HttpGet]
+        [Route("{messageId}")]
+        public Message GetMessage(string messageId)
+        {
+            Console.WriteLine(messageId);
+            string message = messages[messageId];
+            //if (message != null)  NotFound();
+            //foreach (var item in messages)
+            //{
+            //    Console.WriteLine(item.Value);
+            //    Console.WriteLine(item.Key);
+            //}
+            var messageObject = new Message();
+            messageObject.content = message;
+            return messageObject;
+        }
+
+        [HttpPost]
+        [Consumes("application/json")]
+        public string Post(Message message)
+        {
+            Console.WriteLine(message);
+
+            Guid guid = Guid.NewGuid();
+
+            messages.Add(guid.ToString(), message.content);
+            Console.WriteLine(guid.ToString());
+
+            return $"/one/fe/message/{guid}";
         }
     }
 }

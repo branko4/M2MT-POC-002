@@ -1,1 +1,19 @@
-#BUILD_DIR = "./Backend/"
+## ==== BUILD ONE ==== ##
+FROM angular-cli as BUILD_ONE
+
+ARG sourcePath
+ARG baseHref
+ENV HOST_NAME frontend
+
+COPY $sourcePath /app/
+
+WORKDIR /app
+
+RUN ng build --output-path /builded-env --base-href $baseHref
+
+## ==== FINAL ==== ##
+FROM nginx as FINAL
+
+COPY --from=BUILD_ONE /builded-env/ /usr/share/nginx/html
+
+COPY conf.d/default2.conf.template /etc/nginx/templates/default.conf.template

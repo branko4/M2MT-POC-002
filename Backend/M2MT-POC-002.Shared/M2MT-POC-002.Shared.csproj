@@ -1,10 +1,10 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <RootNamespace>M2MT_POC_002.Shared</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>M2MT_POC_002.BackendTwo</RootNamespace>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
 </Project>

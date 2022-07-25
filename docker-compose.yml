@@ -1,0 +1,49 @@
+services:
+  proxy:
+    build:
+      context: .
+      dockerfile: Dockerfile.proxy
+    ports:
+      - "80:80"
+    environment:
+      # - pathOne=/one/fe/
+      locationOne: "http://one/"
+      # - pathTwo=/two/fe/
+      locationTwo: "http://two/"
+      locationOneBackend: "http://onebackend/"
+      locationTwoBackend: "http://twobackend/"
+    depends_on:
+      - one
+      - two
+  one:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+      args:
+        sourcePath: Frontend/FrontendOne/
+        baseHref: /one/fe/
+    environment:
+      HOST_NAME: one
+  two:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+      args:
+        sourcePath: Frontend/FrontendTwo/
+        baseHref: /two/fe/
+    environment:
+      HOST_NAME: two
+  onebackend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+      args:
+        sourcePath: Backend/M2MT-POC-002.BackendOne
+    command: "M2MT-POC-002.BackendOne.dll"
+  twobackend:
+      build:
+        context: .
+        dockerfile: Dockerfile.backend
+        args:
+          sourcePath: Backend/M2MT-POC-002.BackendTwo
+      command: "M2MT-POC-002.BackendTwo.dll"

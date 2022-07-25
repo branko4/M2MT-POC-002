@@ -14,7 +14,7 @@ namespace M2MT_POC_002.BackendOne
 
             // Configure the HTTP request pipeline.
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseAuthorization();
 

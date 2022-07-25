@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M2MT-POC-002.BackendOne", "M2MT-POC-002.BackendOne\M2MT-POC-002.BackendOne.csproj", "{5E7F1D2F-520B-4FC9-9B66-9FFEDAFBCC04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "M2MT-POC-002.BackendOne", "M2MT-POC-002.BackendOne\M2MT-POC-002.BackendOne.csproj", "{5E7F1D2F-520B-4FC9-9B66-9FFEDAFBCC04}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M2MT-POC-002.BackendTwo", "M2MT-POC-002.BackendTwo\M2MT-POC-002.BackendTwo.csproj", "{661109DC-8979-4AEC-9CA2-B042E3C043A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "M2MT-POC-002.BackendTwo", "M2MT-POC-002.BackendTwo\M2MT-POC-002.BackendTwo.csproj", "{661109DC-8979-4AEC-9CA2-B042E3C043A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,0 +1,20 @@
+server {
+    listen       80;
+    server_name  localhost;
+
+    location /one/fe/ {
+        proxy_pass   ${locationOne};
+    }
+
+    location /two/fe/ {
+        proxy_pass   ${locationTwo};
+    }
+
+    location /one/be/ {
+        proxy_pass   ${locationOneBackend};
+    }
+
+    location /two/be/ {
+        proxy_pass   ${locationTwoBackend};
+    }
+}
